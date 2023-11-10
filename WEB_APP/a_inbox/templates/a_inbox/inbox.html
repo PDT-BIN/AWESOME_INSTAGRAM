@@ -1,0 +1,61 @@
+{% extends "layouts/d.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<inbox class="grid grid-cols-5 sm:grid-cols-4 h-[calc(100vh-8rem)] md:h-[calc(100vh-12rem)] shadow-2xl rounded-2xl mx-1 lg:mx-10 xl:mx-48">
+    <div x-data="{ modal_open: false }" class="col-span-1 bg-slate-10 rounded-l-2xl p-2 overflow-y-auto">
+        <div class="p-0 sm:p-4 mb-3 sticky top-0 z-10">
+            <a @click="modal_open = true"
+                class="flex cursor-pointer items-center justify-center h-14 sm:h-16 gap-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full">
+                <img class="h-6 m-auto lg:m-0"
+                    src="https://img.icons8.com/external-anggara-glyph-anggara-putra/32/ffffff/external-edit-user-interface-anggara-glyph-anggara-putra.png">
+                <div class="hidden lg:block text-white rounded-full font-bold">New Message</div>
+            </a>
+        </div>
+
+        <div x-show="modal_open" class="relative z-10" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+            style="display: none;">
+            <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"></div>
+            <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                    <div class="relative transform overflow-hidden rounded-2xl bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                        <div @click.away="modal_open = false" class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                            {% include "a_inbox/form_searchuser.html" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% include "a_inbox/my_conversations.html" %}
+
+        <div class="mt-2 w-full mb-4 flex items-center bg-amber-300 text-white p-3 rounded-lg" role="alert">
+            <svg class="w-8 h-8 mr-2" viewBox="0 0 512 512">
+                <path
+                    d="M315.27,33,96,304H224L192.49,477.23a2.36,2.36,0,0,0,2.33,2.77h0a2.36,2.36,0,0,0,1.89-.95L416,208H288L319.66,34.75A2.45,2.45,0,0,0,317.22,32h0A2.42,2.42,0,0,0,315.27,33Z"
+                    style="fill:none;stroke:#ffffff;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"
+                    fill="white"></path>
+            </svg>
+            <div class="text-sm">You need to verfiy your email to receive email notifications. Check your inbox.
+            </div>
+        </div>
+    </div>
+
+    {% include "a_inbox/conversation.html" %}
+</inbox>
+
+
+<script>
+    function scrollToBottom() {
+        const container = document.getElementById('conversation');
+        container.scrollTop = container.scrollHeight;
+    }
+
+    window.onload = function () {
+        scrollToBottom();
+    };
+</script>
+
+{% endblock content %}

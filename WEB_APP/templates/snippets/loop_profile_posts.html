@@ -1,0 +1,12 @@
+<fade-in class="opacity-0" _="on load transition my opacity to 1 over 0.2s">
+    <div class="grid place-items-start gap-x-8 mx-auto grid-cols-1 max-w-xl
+    {% if posts.count <= 1 %}
+    {% elif posts.count == 2 %}lg:grid-cols-2 lg:max-w-5xl
+    {% else %}lg:grid-cols-2 lg:max-w-5xl xl:grid-cols-3 xl:max-w-7xl{% endif %}">
+        {% for post in posts %}
+        {% include "a_posts/post.html" %}
+        {% empty %}
+        <div class="w-full text-center mt-10">No posts just yet</div>
+        {% endfor %}
+    </div>
+</fade-in>

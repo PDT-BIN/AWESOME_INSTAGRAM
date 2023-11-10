@@ -1,0 +1,13 @@
+<div class="flex flex-col md:flex-row gap-1 md:gap-6 w-full">
+    <img class="w-14 h-14 object-cover rounded-full" src="{{ user.profile.avatar }}">
+    <form method="POST" action="{% url "inbox-newreply" conversation.pk %}" class="w-full">
+        {% csrf_token %}
+
+        {{ new_message_form }}
+
+        <div class="flex justify-between">
+            <button type="submit" class="mt-1">Send Message</button>
+            <a class="button secondaryAction ml-1" href="{{ request.META.HTTP_REFERER }}">Cancel</a>
+        </div>
+    </form>
+</div>
