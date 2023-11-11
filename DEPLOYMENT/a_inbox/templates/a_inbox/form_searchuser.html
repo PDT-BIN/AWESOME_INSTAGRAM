@@ -1,0 +1,12 @@
+<h3 class="text-xl font-bold mb-4" id="modal-title">
+    New Message
+</h3>
+<div id="new-message">
+    <div class="flex gap-2 items-center">
+        <span class="font-bold">To:</span>
+        <input class="p-3 w-screen lg:full" placeholder="Search user ..." type="text"
+            name="search_user" hx-get="{% url "inbox-searchusers" %}" hx-trigger="keyup changed"
+            hx-target="#search-results" hx-swap="innerHTML">
+    </div>
+    <div id="search-results" class="block h-60 overflow-y-auto"></div>
+</div>
