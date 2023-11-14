@@ -1,11 +1,14 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.templatetags.static import static
+from django_resized import ResizedImageField
 
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to="avatars/", null=True, blank=True)
+    image = ResizedImageField(
+        size=(600, 600), quality=85, upload_to="avatars/", null=True, blank=True
+    )
     realname = models.CharField(max_length=20, null=True, blank=True)
     email = models.EmailField(unique=True, null=True)
     location = models.CharField(max_length=20, null=True, blank=True)
